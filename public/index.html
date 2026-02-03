@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RUB Online | Digital Campus</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --color-primary: #92c5f7;
+      --color-secondary: #a07b42;
+      --color-light: #F9F8F6;
+      --color-light-accent: #EFE9E3;
+      --color-medium: #D9CFC7;
+      --color-text: #333333;
+      --color-text-light: #666666;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      color: var(--color-text);
+      background-color: var(--color-light);
+      text-align: center; /* Add this for overall center alignment */
+    }
+
+    /* Center align all text containers */
+    .container-center {
+      text-align: center;
+    }
+
+    /* Navigation */
+    .navbar {
+      background-color: var(--color-light);
+      border-bottom: 1px solid var(--color-medium);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo-img {
+      height: 60px;
+      width: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      padding: 5px;
+      border-radius: 8px;
+      border: 1px solid var(--color-medium);
+    }
+
+    .logo-img img {
+      height: 50px;
+      width: auto;
+      filter: brightness(1.2);
+    }
+
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--color-text);
+      font-weight: 500;
+      transition: all 0.3s;
+      position: relative;
+      padding: 8px 16px;
+      border-radius: 4px;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-primary);
+      background: rgba(146, 197, 247, 0.1);
+    }
+
+    .nav-links a.active {
+      color: var(--color-primary);
+      background: rgba(146, 197, 247, 0.15);
+    }
+
+    .nav-links a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 16px;
+      right: 16px;
+      height: 2px;
+      background-color: var(--color-primary);
+    }
+
+    /* Hero Section */
+    header {
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      color: var(--color-text);
+      padding: 100px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(146, 197, 247, 0.1), rgba(160, 123, 66, 0.1));
+      z-index: 0;
+    }
+
+    header h1 {
+      font-size: 3.2rem;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    header p {
+      font-size: 1.3rem;
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      font-weight: 300;
+    }
+
+    /* Sections - MODIFIED FOR CENTER ALIGNMENT */
+    section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center; /* Add center alignment */
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 50px;
+      color: var(--color-text);
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+    }
+
+    /* Cards - MODIFIED FOR CENTER ALIGNMENT */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      text-align: center; /* Add center alignment */
+    }
+
+    .card {
+      background: var(--color-light-accent);
+      padding: 35px 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Changed from flex-start to center */
+      position: relative;
+      overflow: hidden;
+      text-align: center; /* Add center alignment */
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(146, 197, 247, 0.15);
+      border-color: var(--color-primary);
+    }
+
+    .card h3 {
+      margin-bottom: 20px;
+      color: var(--color-text);
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center; /* Add center alignment */
+      text-align: center; /* Add center alignment */
+    }
+
+    .card h3 i {
+      color: var(--color-primary);
+    }
+
+    .card p {
+      color: var(--color-text-light);
+      line-height: 1.7;
+      text-align: center; /* Add center alignment */
+    }
+
+    /* Image Gallery */
+    .image-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-top: 50px;
+      text-align: center; /* Add center alignment */
+    }
+
+    .gallery-item {
+      border-radius: 12px;
+      overflow: hidden;
+      height: 250px;
+      position: relative;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      border: 1px solid transparent;
+      transition: all 0.3s;
+      margin: 0 auto; /* Center the gallery items */
+    }
+
+    .gallery-item:hover {
+      border-color: var(--color-primary);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(146, 197, 247, 0.15);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      color: white;
+      padding: 15px;
+      font-size: 0.9rem;
+      text-align: center; /* Add center alignment */
+    }
+
+    /* Photo Section - MODIFIED FOR CENTER ALIGNMENT */
+    .photo-section {
+      background: linear-gradient(135deg, rgba(146, 197, 247, 0.05), rgba(160, 123, 66, 0.05));
+      border-radius: 15px;
+      padding: 60px 40px;
+      margin: 50px 0;
+      border: 1px solid rgba(146, 197, 247, 0.2);
+      text-align: center; /* Add center alignment */
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      margin-top: 40px;
+      justify-items: center; /* Center grid items */
+    }
+
+    .photo-item {
+      border-radius: 10px;
+      overflow: hidden;
+      height: 200px;
+      position: relative;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: all 0.3s;
+      max-width: 400px; /* Limit maximum width */
+    }
+
+    .photo-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(146, 197, 247, 0.2);
+    }
+
+    .photo-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .photo-info {
+      padding: 20px 0 0 0;
+      text-align: center;
+    }
+
+    .photo-info h4 {
+      color: var(--color-text);
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .photo-info p {
+      color: var(--color-text-light);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    /* Statistics Section - MODIFIED FOR CENTER ALIGNMENT */
+    .stats-section {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      color: white;
+      padding: 70px 20px;
+      border-radius: 15px;
+      margin: 50px 0;
+      text-align: center;
+    }
+
+    .stats-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .stats-header h2 {
+      font-size: 2.2rem;
+      margin-bottom: 30px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .stats-header h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: white;
+    }
+
+    .stats-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 50px;
+      margin-bottom: 50px;
+      flex-wrap: wrap;
+    }
+
+    .stats-text {
+      flex: 1;
+      min-width: 300px;
+      max-width: 600px;
+      text-align: center; /* Changed from left to center */
+    }
+
+    .stats-text p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      opacity: 0.95;
+      text-align: center;
+    }
+
+    .stats-image {
+      flex: 1;
+      min-width: 300px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .stats-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .stats-image img:hover {
+      transform: scale(1.02);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+      justify-items: center; /* Center grid items */
+    }
+
+    .stat-item {
+      padding: 30px 20px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s ease;
+      max-width: 250px;
+      text-align: center;
+    }
+
+    .stat-item:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .stat-label {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      font-weight: 500;
+    }
+
+    /* Form - MODIFIED FOR CENTER ALIGNMENT */
+    .form-container {
+      background-color: white;
+      border-radius: 15px;
+      padding: 60px 40px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      margin-top: 30px;
+      border: 1px solid var(--color-medium);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .form-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+      text-align: left; /* Keep form labels left-aligned for readability */
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 500;
+      color: var(--color-text);
+      text-align: left;
+    }
+
+    .form-group select,
+    .form-group input[type="text"],
+    .form-group input[type="email"] {
+      width: 100%;
+      padding: 14px 18px;
+      border: 1px solid var(--color-medium);
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      background-color: var(--color-light);
+      transition: all 0.3s;
+      text-align: left;
+    }
+
+    .form-group select:focus,
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(146, 197, 247, 0.2);
+    }
+
+    .radio-group {
+      display: flex;
+      gap: 30px;
+      margin-top: 10px;
+      justify-content: flex-start; /* Keep radio buttons left-aligned */
+    }
+
+    .radio-group label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: normal;
+      cursor: pointer;
+    }
+
+    .radio-group input[type="radio"] {
+      accent-color: var(--color-primary);
+    }
+
+    button[type="submit"] {
+      background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+      color: var(--color-text);
+      border: none;
+      padding: 16px 40px;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: block;
+      margin: 40px auto 0;
+      box-shadow: 0 5px 15px rgba(146, 197, 247, 0.3);
+    }
+
+    button[type="submit"]:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(146, 197, 247, 0.4);
+    }
+
+    /* Value & Philosophy Sections - MODIFIED FOR CENTER ALIGNMENT */
+    .value-section {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 500;
+      background: linear-gradient(135deg, rgba(146, 197, 247, 0.1), rgba(160, 123, 66, 0.1));
+      padding: 70px 20px;
+      border-radius: 15px;
+      margin: 50px 0;
+      border: 1px solid rgba(146, 197, 247, 0.3);
+    }
+
+    .philosophy {
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+      font-size: 2rem;
+      font-weight: 600;
+      border-radius: 15px;
+      margin: 50px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .philosophy::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="white" stroke-width="2" stroke-opacity="0.1"/></svg>');
+      background-size: 100px;
+      opacity: 0.3;
+    }
+
+    .philosophy p {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    /* CTA Section - ALREADY CENTERED */
+    .cta {
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .cta button {
+      padding: 18px 45px;
+      background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+      color: var(--color-text);
+      border: none;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 5px 15px rgba(146, 197, 247, 0.3);
+      margin-top: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: 0.5s;
+    }
+
+    .cta button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(146, 197, 247, 0.4);
+    }
+
+    .cta button:hover::before {
+      left: 100%;
+    }
+
+    /* Footer - MODIFIED FOR CENTER ALIGNMENT */
+    footer {
+      background-color: var(--color-text);
+      color: var(--color-light-accent);
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.95rem;
+      margin-top: 50px;
+      border-top: 4px solid var(--color-primary);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    /* Badge for required fields */
+    .required::after {
+      content: '*';
+      color: #ff4444;
+      margin-left: 4px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 1rem;
+      }
+      
+      .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .nav-links {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      header h1 {
+        font-size: 2.5rem;
+      }
+      
+      header p {
+        font-size: 1.1rem;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
+      }
+      
+      .cards {
+        grid-template-columns: 1fr;
+      }
+      
+      .image-gallery {
+        grid-template-columns: 1fr;
+      }
+      
+      .photo-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .form-container {
+        padding: 40px 20px;
+      }
+      
+      .radio-group {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      /* Center radio group on mobile */
+      .radio-group {
+        justify-content: center;
+      }
+    }
+
+    /* Animation for cards */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .card {
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .card:nth-child(1) { animation-delay: 0.1s; }
+    .card:nth-child(2) { animation-delay: 0.2s; }
+    .card:nth-child(3) { animation-delay: 0.3s; }
+    
+    /* Additional center alignment classes */
+    .center-text {
+      text-align: center;
+    }
+    
+    .center-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+    
+    .center-margin {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo-area">
+        <div class="logo-img">
+          <img src="rubblogo.png" alt="Royal University of Bhutan Logo" onerror="this.src='https://via.placeholder.com/50x50/92c5f7/a07b42?text=RUB'">
+        </div>
+        <a href="/" class="logo-text">RUB Online</a>
+      </div>
+      <div class="nav-links">
+        <a href="/" class="active">Home</a>
+        <a href="/video">Module Foundations</a>
+        <a href="/family">RUB Colleges</a>
+        <a href="/video">Programs</a>
+        <a href="/family">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header>
+    <h1>RUB Online</h1>
+    <p>The Royal University's Digital Campus. For the curious of all ages. Explore every field, from any level — right here in Bhutan.</p>
+  </header>
+
+  <!-- STATISTICS SECTION -->
+  <section class="stats-section">
+    <div class="stats-container">
+      <div class="stats-header">
+        <h2>Addressing the Educational Challenge</h2>
+        <div class="stats-content">
+          <div class="stats-text">
+            <p>In the 2025 BHSEC Class XII examinations, only 77.84% of students passed, leaving over 2,000 students unable to clear their exams. 
+              We see this as an opportunity to help educate these young Bhutanese minds.</p>
+          </div>
+          <div class="stats-image">
+            <img src="royal_family.avif" 
+                 alt="Bhutanese Students Learning" 
+                 onerror="this.src='https://via.placeholder.com/400x300/92c5f7/a07b42?text=Bhutanese+Students'">
+          </div>
+        </div>
+      </div>
+      
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">77.84%</div>
+          <div class="stat-label">2025 Pass Percentage</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">2,055+</div>
+          <div class="stat-label">Students Needing Support</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">9,273</div>
+          <div class="stat-label">Students Appeared</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">81</div>
+          <div class="stat-label">Higher Secondary Schools</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section>
+    <h2 class="section-title">Education That Grows With You</h2>
+
+    <div class="cards">
+      <div class="card">
+        <h3><i class="fas fa-graduation-cap"></i> High School Students</h3>
+        <p>Hands-on programs to explore careers, build real skills, and discover your true path before stepping into university life. 
+          <strong>Specialized short courses</strong> give higher secondary students an introduction to university modules and help explore their aptitude for bachelor programs.</p>
+      </div>
+
+      <div class="card">
+        <h3><i class="fas fa-book-reader"></i> Lifelong Learners</h3>
+        <p>Continue growing — whether you want to upskill, reskill, or learn purely for passion. Education on your own terms. 
+          This is not to replace BHSEC but to enhance student learning with new short online courses to bridge the gap between Higher Secondary School education with University.</p>
+      </div>
+
+      <div class="card">
+        <h3><i class="fas fa-search"></i> The Curious Mind</h3>
+        <p>Explore every discipline, from science to arts, technology to sustainability. Learn without limits, at any level. 
+          Providing an online platform and short courses for learning for the class 10 and above student population.</p>
+      </div>
+    </div>
+
+    <!-- Image Gallery -->
+    <div class="image-gallery">
+      <div class="gallery-item">
+        <img src="onlinerub.png" alt="University Campus" onerror="this.src='https://via.placeholder.com/800x400/92c5f7/a07b42?text=RUB+Campus'">
+        <div class="gallery-caption">RUB Digital Campus</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Online Learning" onerror="this.src='https://via.placeholder.com/800x400/92c5f7/a07b42?text=Online+Learning'">
+        <div class="gallery-caption">Interactive Online Learning</div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Student Collaboration" onerror="this.src='https://via.placeholder.com/800x400/92c5f7/a07b42?text=Student+Collaboration'">
+        <div class="gallery-caption">Student Collaboration</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTO SECTION -->
+  <section class="photo-section">
+    <h2 class="section-title">Campus Life & Learning Environment</h2>
+    <p style="text-align: center; max-width: 800px; margin: 0 auto 30px; color: var(--color-text-light);">
+      Experience our vibrant campus community and state-of-the-art learning facilities through these moments captured by our students and faculty.
+    </p>
+    
+    <div class="photo-grid">
+      <div class="photo-item">
+        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="University Library" onerror="this.src='https://via.placeholder.com/600x400/92c5f7/a07b42?text=Library'">
+      </div>
+      <div class="photo-item">
+        <img src="https://images.unsplash.com/photo-1524178234883-043d5c3f3cf4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Classroom Discussion" onerror="this.src='https://via.placeholder.com/600x400/92c5f7/a07b42?text=Classroom'">
+      </div>
+      <div class="photo-item">
+        <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Science Lab" onerror="this.src='https://via.placeholder.com/600x400/92c5f7/a07b42?text=Science+Lab'">
+      </div>
+      <div class="photo-item">
+        <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Online Learning" onerror="this.src='https://via.placeholder.com/600x400/92c5f7/a07b42?text=Online+Class'">
+      </div>
+    </div>
+    
+    <div class="photo-info">
+      <h4>Student Testimonial</h4>
+      <p>"Most of all, the questions in subjects like English and Chemistry felt AI-generated." - A 2025 class 12 student quoted in The Bhutanese dated 24/01/2026</p>
+      <p style="margin-top: 15px; font-style: italic;">Students also cited "out of syllabus" questions, marking system and lack of rest/study time between exams among other reasons for the decrease in overall pass percentage.</p>
+    </div>
+  </section>
+
+  <!-- REQUEST INFO FORM -->
+  <section>
+    <h2 class="section-title">Step 1 of 2 — Request Information</h2>
+    <p style="text-align:center; margin-bottom:30px; color: var(--color-text-light);">
+      To learn more about RUB Online or a specific program, fill out the form below and check your email for information on next steps.
+    </p>
+    <p style="text-align:center; font-size:0.9rem; color: var(--color-text-light); margin-bottom: 30px;">* Indicates a required field</p>
+
+    <div class="form-container">
+      <form id="infoForm">
+        <!-- Degree Type -->
+        <div class="form-group">
+          <label><strong>Degree type</strong></label>
+          <select>
+            <option>Select a degree type</option>
+            <option>Certificate</option>
+            <option>Diploma</option>
+            <option>Bachelor's</option>
+            <option>Master's</option>
+            <option>Professional Course</option>
+          </select>
+        </div>
+
+        <!-- Area of Interest -->
+        <div class="form-group">
+          <label><strong>Area of interest</strong></label>
+          <select>
+            <option>Select an interest area</option>
+            <option>Technology & IT</option>
+            <option>Business & Management</option>
+            <option>Health & Wellness</option>
+            <option>Education</option>
+            <option>Arts & Humanities</option>
+            <option>Environmental Studies</option>
+          </select>
+        </div>
+
+        <!-- Program -->
+        <div class="form-group">
+          <label class="required"><strong>Program</strong></label>
+          <select required>
+            <option value="">Select a program</option>
+            <option>BSc Information Technology</option>
+            <option>BA English Studies</option>
+            <option>Bachelor of Business Administration</option>
+            <option>Diploma in Digital Marketing</option>
+            <option>Certificate in Sustainable Development</option>
+          </select>
+        </div>
+
+        <!-- Military Question -->
+        <div class="form-group">
+          <label class="required"><strong>Are you currently serving or affiliated with the Royal Bhutan Army or other armed forces?</strong></label>
+          <div class="radio-group">
+            <label>
+              <input type="radio" name="military" value="yes" required> Yes
+            </label>
+            <label>
+              <input type="radio" name="military" value="no"> No
+            </label>
+          </div>
+        </div>
+
+        <button type="submit">Continue to Step 2</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- MODULE FOUNDATIONS SECTION -->
+  <section>
+    <h2 class="section-title">Module Foundations</h2>
+    <p style="text-align:center; max-width: 800px; margin: 0 auto 40px; color: var(--color-text-light);">
+      Our specialized short courses allow students to understand university modules in an introductory manner. These courses are designed to bridge the gap between Higher Secondary School education and University-level learning.
+    </p>
+    
+    <div class="cards">
+      <div class="card">
+        <h3><i class="fas fa-video"></i> Interactive Video Conferences</h3>
+        <p>Live, interactive sessions with university professors and industry experts. Engage in real-time discussions, Q&A sessions, and collaborative learning experiences.</p>
+      </div>
+
+      <div class="card">
+        <h3><i class="fas fa-laptop-code"></i> Digital Learning Platform</h3>
+        <p>Access course materials, assignments, and resources through our intuitive online platform. Learn at your own pace with structured guidance and support.</p>
+      </div>
+
+      <div class="card">
+        <h3><i class="fas fa-users"></i> Peer Collaboration</h3>
+        <p>Connect with fellow students across Bhutan. Work on group projects, participate in discussions, and build a network of like-minded learners.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUE -->
+  <section class="value-section">
+    <p><strong>We provide exceptional value.</strong> You choose what it's worth. <br>
+    <span style="font-size: 1.2rem; display: block; margin-top: 15px;">Transforming education through innovation and accessibility</span></p>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="philosophy">
+    <p>Your journey. Your purpose.</p>
+    <p style="font-size: 1.3rem; margin-top: 20px; font-weight: 300;">Opportunity to help educate more than 2000 young Bhutanese youth</p>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <h2 class="section-title">Start Your Learning Journey</h2>
+    <p style="text-align:center; max-width: 700px; margin: 0 auto 30px; color: var(--color-text-light);">
+      Join thousands of students who have transformed their lives through RUB Online. Flexible schedules, expert faculty, and a global network await.
+    </p>
+    <button onclick="window.location.href='/video'">Explore Module Foundations</button>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">RUB Online</div>
+      <p>© 2026 RUB Online | Royal University of Bhutan Digital Campus</p>
+      <p style="font-size: 0.85rem; color: var(--color-medium);">
+        Transforming education through innovation and accessibility
+      </p>
+      <p style="font-size: 0.8rem; color: var(--color-medium); margin-top: 10px;">
+        Done by: Group 55 | Date: 2nd February 2026
+      </p>
+    </div>
+  </footer>
+
+  <script>
+  
+      
+      // Add hover effects to cards
+      const cards = document.querySelectorAll('.card');
+      cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          card.style.transform = 'translateY(-10px)';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'translateY(0)';
+        });
+      });
+      
+      // Smooth scroll for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          if (targetId === '#') return;
+          
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

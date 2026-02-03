@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RUB Online | Video Conference</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --color-primary: #92c5f7;
+      --color-secondary: #a07b42;
+      --color-light: #F9F8F6;
+      --color-light-accent: #EFE9E3;
+      --color-medium: #D9CFC7;
+      --color-text: #333333;
+      --color-text-light: #666666;
+      --color-success: #4CAF50;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      color: var(--color-text);
+      background-color: var(--color-light);
+      text-align: center;
+    }
+
+    /* Navigation */
+    .navbar {
+      background-color: var(--color-light);
+      border-bottom: 1px solid var(--color-medium);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo-img {
+      height: 60px;
+      width: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      padding: 5px;
+      border-radius: 8px;
+      border: 1px solid var(--color-medium);
+    }
+
+    .logo-img span {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: white;
+      padding: 0 10px;
+    }
+
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--color-text);
+      font-weight: 500;
+      transition: all 0.3s;
+      position: relative;
+      padding: 8px 16px;
+      border-radius: 4px;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-primary);
+      background: rgba(146, 197, 247, 0.1);
+    }
+
+    .nav-links a.active {
+      color: var(--color-primary);
+      background: rgba(146, 197, 247, 0.15);
+    }
+
+    .nav-links a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 16px;
+      right: 16px;
+      height: 2px;
+      background-color: var(--color-primary);
+    }
+
+    /* Hero Section */
+    header {
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      color: var(--color-text);
+      padding: 100px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(146, 197, 247, 0.1), rgba(160, 123, 66, 0.1));
+      z-index: 0;
+    }
+
+    header h1 {
+      font-size: 3.2rem;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    header p {
+      font-size: 1.3rem;
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      font-weight: 300;
+    }
+
+    /* Sections */
+    section {
+      padding: 80px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.2rem;
+      margin-bottom: 50px;
+      color: var(--color-text);
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+    }
+
+    /* Video Container */
+    .video-container {
+      max-width: 1000px;
+      margin: 0 auto 40px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(146, 197, 247, 0.15);
+      background-color: var(--color-light-accent);
+      position: relative;
+      border: 1px solid var(--color-primary);
+      text-align: center;
+    }
+
+    .video-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+      z-index: 2;
+    }
+
+    #conferenceVideo {
+      width: 100%;
+      height: 500px;
+      display: block;
+      background-color: #000;
+    }
+
+    .video-controls {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      padding: 20px;
+      background-color: var(--color-light);
+      border-top: 1px solid var(--color-medium);
+      flex-wrap: wrap;
+    }
+
+    .video-controls button {
+      background: var(--color-primary);
+      color: var(--color-text);
+      border: none;
+      padding: 12px 25px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 3px 10px rgba(146, 197, 247, 0.3);
+    }
+
+    .video-controls button:hover {
+      background: #7bb4f5;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(146, 197, 247, 0.4);
+    }
+
+    /* Video Info */
+    .video-info {
+      background-color: white;
+      padding: 35px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+      margin-bottom: 50px;
+      border: 1px solid var(--color-medium);
+      border-left: 4px solid var(--color-primary);
+      text-align: center;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .video-info h3 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: var(--color-text);
+      text-align: center;
+    }
+
+    .video-info p {
+      margin-bottom: 15px;
+      color: var(--color-text-light);
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .video-info strong {
+      color: var(--color-text);
+    }
+
+    /* STUDENT MESSAGES SECTION - NEW */
+    .messages-section {
+      max-width: 1000px;
+      margin: 50px auto 80px;
+      text-align: left;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      padding: 40px;
+      border: 1px solid var(--color-medium);
+    }
+
+    .messages-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid var(--color-light-accent);
+    }
+
+    .messages-header h3 {
+      font-size: 1.8rem;
+      color: var(--color-text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .messages-header h3 i {
+      color: var(--color-primary);
+    }
+
+    .messages-count {
+      background: var(--color-light-accent);
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      color: var(--color-text-light);
+    }
+
+    /* Message Form */
+    .message-form {
+      background: var(--color-light-accent);
+      padding: 30px;
+      border-radius: 12px;
+      margin-bottom: 40px;
+      border: 1px solid var(--color-medium);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--color-text);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid var(--color-medium);
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      transition: all 0.3s;
+      background: white;
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(146, 197, 247, 0.2);
+    }
+
+    .submit-btn {
+      background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+      color: var(--color-text);
+      border: none;
+      padding: 14px 30px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(146, 197, 247, 0.4);
+    }
+
+    /* Messages List */
+    .messages-list {
+      max-height: 600px;
+      overflow-y: auto;
+      padding-right: 10px;
+    }
+
+    .message-item {
+      background: var(--color-light);
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 20px;
+      border-left: 4px solid var(--color-primary);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+      transition: transform 0.3s;
+    }
+
+    .message-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    }
+
+    .message-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--color-light-accent);
+    }
+
+    .message-author {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+
+    .author-info h4 {
+      font-size: 1.1rem;
+      color: var(--color-text);
+      margin-bottom: 3px;
+    }
+
+    .author-info .author-role {
+      font-size: 0.85rem;
+      color: var(--color-text-light);
+      background: var(--color-light-accent);
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    .message-time {
+      font-size: 0.85rem;
+      color: var(--color-text-light);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .message-content {
+      color: var(--color-text);
+      line-height: 1.7;
+      margin-bottom: 15px;
+    }
+
+    .message-category {
+      display: inline-block;
+      background: rgba(146, 197, 247, 0.1);
+      color: var(--color-primary);
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-top: 10px;
+    }
+
+    .no-messages {
+      text-align: center;
+      padding: 40px;
+      color: var(--color-text-light);
+      font-style: italic;
+    }
+
+    .no-messages i {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: var(--color-medium);
+    }
+
+    /* Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      text-align: center;
+    }
+
+    .card {
+      background: var(--color-light-accent);
+      padding: 35px 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      border: 1px solid transparent;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(146, 197, 247, 0.15);
+      border-color: var(--color-primary);
+    }
+
+    .card h3 {
+      margin-bottom: 20px;
+      color: var(--color-text);
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .card h3 i {
+      color: var(--color-primary);
+    }
+
+    .card p {
+      color: var(--color-text-light);
+      line-height: 1.7;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .card button {
+      background: var(--color-primary);
+      color: var(--color-text);
+      border: none;
+      padding: 12px 25px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 3px 10px rgba(146, 197, 247, 0.3);
+    }
+
+    .card button:hover {
+      background: #7bb4f5;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(146, 197, 247, 0.4);
+    }
+
+    /* Conference Gallery */
+    .conference-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-top: 50px;
+      justify-items: center;
+    }
+
+    .gallery-item {
+      border-radius: 12px;
+      overflow: hidden;
+      height: 200px;
+      position: relative;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.3s;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .gallery-item:hover {
+      border-color: var(--color-primary);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(146, 197, 247, 0.15);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .gallery-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      color: white;
+      padding: 15px;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    /* Join Conference Section */
+    .join-conference {
+      background: linear-gradient(135deg, rgba(146, 197, 247, 0.1), rgba(160, 123, 66, 0.1));
+      border-radius: 15px;
+      padding: 60px 40px;
+      text-align: center;
+      margin: 60px auto 0;
+      border: 1px solid rgba(146, 197, 247, 0.3);
+      max-width: 900px;
+    }
+
+    .join-conference h3 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: var(--color-text);
+    }
+
+    .join-conference p {
+      color: var(--color-text-light);
+      max-width: 700px;
+      margin: 0 auto 30px;
+      text-align: center;
+    }
+
+    .join-btn {
+      background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+      color: var(--color-text);
+      border: none;
+      padding: 16px 45px;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 5px 15px rgba(146, 197, 247, 0.3);
+    }
+
+    .join-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(146, 197, 247, 0.4);
+    }
+
+    /* Live Indicator */
+    .live-indicator {
+      display: inline-block;
+      background-color: #ff4444;
+      color: white;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-left: 10px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.7; }
+      100% { opacity: 1; }
+    }
+
+    /* Progress bar */
+    .progress-container {
+      width: 100%;
+      background-color: var(--color-medium);
+      height: 4px;
+      margin-top: 10px;
+      border-radius: 2px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+      width: 0%;
+      transition: width 0.3s;
+      border-radius: 2px;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--color-text);
+      color: var(--color-light-accent);
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 0.95rem;
+      margin-top: 50px;
+      border-top: 4px solid var(--color-primary);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 10px;
+    }
+
+    /* Video overlay */
+    .video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 1;
+      transition: opacity 0.3s;
+      cursor: pointer;
+    }
+
+    .video-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .play-button {
+      background: rgba(146, 197, 247, 0.9);
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--color-text);
+      transition: transform 0.3s;
+    }
+
+    .play-button:hover {
+      transform: scale(1.1);
+      background: rgba(146, 197, 247, 1);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 1rem;
+      }
+      
+      .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .nav-links {
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      header h1 {
+        font-size: 2.5rem;
+      }
+      
+      header p {
+        font-size: 1.1rem;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
+      }
+      
+      #conferenceVideo {
+        height: 300px;
+      }
+      
+      .video-controls {
+        flex-wrap: wrap;
+      }
+      
+      .cards {
+        grid-template-columns: 1fr;
+      }
+      
+      .video-info, .join-conference, .messages-section {
+        padding: 25px 20px;
+      }
+      
+      .conference-gallery {
+        grid-template-columns: 1fr;
+      }
+      
+      .messages-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+      
+      .message-header {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo-area">
+        <div class="logo-img">
+          <img src="rubblogo.png" alt="Royal University of Bhutan Logo" style="height: 50px; width: auto;" onerror="this.style.display='none'; this.parentElement.innerHTML='<span>RUB</span>'">
+        </div>
+        <a href="/" class="logo-text">RUB Online</a>
+      </div>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/video" class="active">Module Foundations</a>
+        <a href="/family">RUB Colleges</a>
+        <a href="/video">Programs</a>
+        <a href="/family">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header>
+    <h1>RUB Digital Conference</h1>
+    <p>Live and recorded conferences, lectures, and seminars from across the Royal University of Bhutan network.</p>
+  </header>
+
+  <!-- VIDEO SECTION -->
+  <section>
+    <h2 class="section-title">Introduction to CAD & Digital Fabrication from JNEC</h2>
+    
+    <div class="video-container">
+      <div class="video-overlay" id="videoOverlay">
+        <div class="play-button" onclick="playVideo()">
+          <i class="fas fa-play"></i>
+        </div>
+      </div>
+      <video id="conferenceVideo" poster="https://images.unsplash.com/photo-1591115765373-5207764f72e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80">
+        <source src="rub 100_G55 v3.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      
+      <div class="video-controls">
+        <button onclick="playVideo()"><i class="fas fa-play"></i> Play</button>
+        <button onclick="pauseVideo()"><i class="fas fa-pause"></i> Pause</button>
+        <button onclick="restartVideo()"><i class="fas fa-redo"></i> Restart</button>
+        <button onclick="toggleFullscreen()"><i class="fas fa-expand"></i> Fullscreen</button>
+        <button onclick="toggleMute()"><i class="fas fa-volume-up"></i> Mute</button>
+      </div>
+      
+      <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+
+    <div class="video-info">
+      <h3>Digital Transformation in Bhutanese Higher Education <span class="live-indicator">LIVE NOW</span></h3>
+      <p><strong>Date:</strong> March 15, 2024 | <strong>Duration:</strong> 45:22</p>
+      <p><strong>Speaker:</strong> Dr. Karma Wangchuk, Vice Chancellor, RUB</p>
+      <p><strong>Description:</strong> This keynote address explores the future of digital learning in Bhutan, discussing how RUB Online is bridging geographical barriers and providing quality education to every corner of the kingdom. The conference covers innovative teaching methodologies, technology integration, and the roadmap for digital education in Bhutan.</p>
+    </div>
+
+    <!-- STUDENT MESSAGES SECTION -->
+    <div class="messages-section">
+      <div class="messages-header">
+        <h3><i class="fas fa-comments"></i> Discussion & Questions</h3>
+        <div class="messages-count" id="messagesCount">3 messages</div>
+      </div>
+
+      <!-- Message Form -->
+      <div class="message-form">
+        <h4 style="margin-bottom: 20px; color: var(--color-text);">Share your thoughts or ask a question</h4>
+        <form id="messageForm">
+          <div class="form-group">
+            <label for="studentName">Your Name</label>
+            <input type="text" id="studentName" placeholder="Enter your name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="studentCollege">College/Program</label>
+            <input type="text" id="studentCollege" placeholder="e.g., JNEC, CST, etc.">
+          </div>
+          
+          <div class="form-group">
+            <label for="messageType">Message Type</label>
+            <select id="messageType">
+              <option value="question">Question</option>
+              <option value="comment">Comment</option>
+              <option value="insight">Insight</option>
+              <option value="feedback">Feedback</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="messageText">Your Message</label>
+            <textarea id="messageText" placeholder="What did you learn? What questions do you have? Share your thoughts about this conference..." required></textarea>
+          </div>
+          
+          <button type="submit" class="submit-btn">
+            <i class="fas fa-paper-plane"></i> Post Message
+          </button>
+        </form>
+      </div>
+
+      <!-- Messages List -->
+      <div class="messages-list" id="messagesList">
+        <!-- Sample messages - In real app, these would come from a database -->
+        <div class="message-item">
+          <div class="message-header">
+            <div class="message-author">
+              <div class="author-avatar">PD</div>
+              <div class="author-info">
+                <h4>Pema Dorji</h4>
+                <span class="author-role">Student • JNEC</span>
+              </div>
+            </div>
+            <div class="message-time">
+              <i class="far fa-clock"></i> 2 hours ago
+            </div>
+          </div>
+          <div class="message-content">
+            The discussion about integrating traditional Bhutanese architecture with CAD technology was fascinating! How can we apply this to preserve our dzongs while making them more earthquake-resistant?
+          </div>
+          <span class="message-category">Question</span>
+        </div>
+
+        <div class="message-item">
+          <div class="message-header">
+            <div class="message-author">
+              <div class="author-avatar">ST</div>
+              <div class="author-info">
+                <h4>Sonam Tobgay</h4>
+                <span class="author-role">Faculty • CST</span>
+              </div>
+            </div>
+            <div class="message-time">
+              <i class="far fa-clock"></i> 5 hours ago
+            </div>
+          </div>
+          <div class="message-content">
+            Excellent presentation on digital fabrication! I appreciate how you connected modern technology with Bhutan's Gross National Happiness philosophy. The 3D printed traditional motifs example was particularly inspiring for our design students.
+          </div>
+          <span class="message-category">Insight</span>
+        </div>
+
+        <div class="message-item">
+          <div class="message-header">
+            <div class="message-author">
+              <div class="author-avatar">DY</div>
+              <div class="author-info">
+                <h4>Deki Yangzom</h4>
+                <span class="author-role">Student • Gaeddu</span>
+              </div>
+            </div>
+            <div class="message-time">
+              <i class="far fa-clock"></i> 1 day ago
+            </div>
+          </div>
+          <div class="message-content">
+            Can you recommend specific CAD software that would be most suitable for beginners in Bhutan, considering our internet connectivity challenges in remote areas?
+          </div>
+          <span class="message-category">Question</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Conference Gallery -->
+    <h3 style="text-align: center; margin-top: 50px; color: var(--color-text);">More Conference Videos</h3>
+    <div class="conference-gallery">
+      <div class="gallery-item" onclick="changeVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4', 'Sustainability in Bhutanese Education', 'Dr. Pema Dorji', 'Sustainability Conference from April 2024')">
+        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sustainability Conference">
+        <div class="gallery-caption">Sustainability Conference</div>
+      </div>
+      <div class="gallery-item" onclick="changeVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4', 'Technology Innovation Summit', 'Prof. Sonam Tobgay', 'Tech Innovation Summit from March 2024')">
+        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Tech Summit">
+        <div class="gallery-caption">Tech Innovation Summit</div>
+      </div>
+      <div class="gallery-item" onclick="changeVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4', 'Cultural Heritage Preservation', 'Dr. Deki Yangzom', 'Cultural Heritage Conference from February 2024')">
+        <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Cultural Conference">
+        <div class="gallery-caption">Cultural Heritage Conference</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UPCOMING CONFERENCES -->
+  <section style="background: linear-gradient(135deg, rgba(146, 197, 247, 0.05), rgba(160, 123, 66, 0.05)); border-radius: 15px;">
+    <h2 class="section-title">Upcoming Live Conferences</h2>
+    
+    <div class="cards">
+      <div class="card">
+        <h3><i class="fas fa-leaf"></i> Sustainable Development in Bhutan</h3>
+        <p><strong>Date:</strong> April 10, 2024 | 10:00 AM BTT</p>
+        <p><strong>Speaker:</strong> Dr. Pema Dorji, Environmental Studies Department</p>
+        <p>Join experts from across RUB colleges discussing sustainability initiatives and environmental conservation in Bhutan.</p>
+        <button onclick="addToCalendar('Sustainable Development in Bhutan', '2024-04-10T10:00')">
+          <i class="far fa-calendar-plus"></i> Add to Calendar
+        </button>
+      </div>
+
+      <div class="card">
+        <h3><i class="fas fa-laptop-code"></i> Tech Innovation Summit</h3>
+        <p><strong>Date:</strong> April 22, 2024 | 2:00 PM BTT</p>
+        <p><strong>Speaker:</strong> Prof. Sonam Tobgay, Computer Science Department</p>
+        <p>Showcasing student projects and research in technology and innovation from RUB colleges across Bhutan.</p>
+        <button onclick="addToCalendar('Tech Innovation Summit', '2024-04-22T14:00')">
+          <i class="far fa-calendar-plus"></i> Add to Calendar
+        </button>
+      </div>
+
+      <div class="card">
+        <h3><i class="fas fa-chalkboard-teacher"></i> Future of Online Learning</h3>
+        <p><strong>Date:</strong> May 5, 2024 | 11:00 AM BTT</p>
+        <p><strong>Speaker:</strong> Panel of Educators and Digital Experts</p>
+        <p>Panel discussion with educators and digital learning experts on the evolution of online education in Bhutan.</p>
+        <button onclick="addToCalendar('Future of Online Learning', '2024-05-05T11:00')">
+          <i class="far fa-calendar-plus"></i> Add to Calendar
+        </button>
+      </div>
+    </div>
+
+    <!-- Join Conference Section -->
+    <div class="join-conference">
+      <h3>Join Our Next Live Conference</h3>
+      <p>Participate in real-time discussions, ask questions to speakers, and connect with fellow students and faculty from across Bhutan.</p>
+      <button class="join-btn" onclick="joinLiveConference()">
+        <i class="fas fa-video"></i> Join Live Conference
+      </button>
+      <p style="font-size: 0.9rem; margin-top: 15px; color: var(--color-text-light); text-align: center;">
+        <i class="fas fa-info-circle" style="color: var(--color-primary);"></i> Live conferences require free registration
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">RUB Online</div>
+      <p>© 2026 RUB Online | Royal University of Bhutan Digital Campus</p>
+      <p style="font-size: 0.85rem; color: var(--color-medium);">
+        Connecting minds across the kingdom through digital conferences
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const video = document.getElementById('conferenceVideo');
+    const videoOverlay = document.getElementById('videoOverlay');
+    const progressBar = document.getElementById('progressBar');
+    const messagesList = document.getElementById('messagesList');
+    const messagesCount = document.getElementById('messagesCount');
+    const messageForm = document.getElementById('messageForm');
+    
+    // Sample messages data
+    let messages = [
+      {
+        id: 1,
+        name: "Pema Dorji",
+        college: "JNEC",
+        role: "Student",
+        content: "The discussion about integrating traditional Bhutanese architecture with CAD technology was fascinating! How can we apply this to preserve our dzongs while making them more earthquake-resistant?",
+        type: "question",
+        time: "2 hours ago"
+      },
+      {
+        id: 2,
+        name: "Sonam Tobgay",
+        college: "CST",
+        role: "Faculty",
+        content: "Excellent presentation on digital fabrication! I appreciate how you connected modern technology with Bhutan's Gross National Happiness philosophy. The 3D printed traditional motifs example was particularly inspiring for our design students.",
+        type: "insight",
+        time: "5 hours ago"
+      },
+      {
+        id: 3,
+        name: "Deki Yangzom",
+        college: "",
+        role: "Student",
+        content: "Can you recommend specific CAD software that would be most suitable for beginners in Bhutan, considering our internet connectivity challenges in remote areas?",
+        type: "question",
+        time: "1 day ago"
+      }
+    ];
+    
+    // Update progress bar
+    video.addEventListener('timeupdate', function() {
+      const progress = (video.currentTime / video.duration) * 100;
+      progressBar.style.width = progress + '%';
+    });
+    
+    function playVideo() {
+      video.play();
+      videoOverlay.classList.add('hidden');
+    }
+    
+    function pauseVideo() {
+      video.pause();
+    }
+    
+    function restartVideo() {
+      video.currentTime = 0;
+      video.play();
+      videoOverlay.classList.add('hidden');
+    }
+    
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        video.requestFullscreen().catch(err => {
+          console.log(`Error attempting to enable fullscreen: ${err.message}`);
+        });
+      } else {
+        document.exitFullscreen();
+      }
+    }
+    
+    function toggleMute() {
+      video.muted = !video.muted;
+      const muteBtn = document.querySelector('button[onclick="toggleMute()"]');
+      muteBtn.innerHTML = video.muted ? 
+        '<i class="fas fa-volume-mute"></i> Unmute' : 
+        '<i class="fas fa-volume-up"></i> Mute';
+    }
+    
+    function changeVideo(videoSrc, title, speaker, description) {
+      video.pause();
+      video.src = videoSrc;
+      video.load();
+      videoOverlay.classList.remove('hidden');
+      
+      // Update video info
+      document.querySelector('.video-info h3').innerHTML = title + ' <span class="live-indicator">RECORDED</span>';
+      document.querySelector('.video-info p:nth-of-type(1)').innerHTML = `<strong>Date:</strong> Recent | <strong>Duration:</strong> 30-45 min`;
+      document.querySelector('.video-info p:nth-of-type(2)').innerHTML = `<strong>Speaker:</strong> ${speaker}`;
+      document.querySelector('.video-info p:nth-of-type(3)').innerHTML = `<strong>Description:</strong> ${description}`;
+    }
+    
+    function addToCalendar(eventName, dateTime) {
+      const eventDate = new Date(dateTime);
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+      const formattedDate = eventDate.toLocaleDateString('en-US', options);
+      
+      alert(`"${eventName}" has been added to your calendar!\n\nDate: ${formattedDate}\n\nYou will receive a reminder 1 day before the event.`);
+    }
+    
+    function joinLiveConference() {
+      const now = new Date();
+      const upcomingEvents = [
+        { name: "Sustainable Development in Bhutan", date: new Date('2024-04-10T10:00') },
+        { name: "Tech Innovation Summit", date: new Date('2024-04-22T14:00') },
+        { name: "Future of Online Learning", date: new Date('2024-05-05T11:00') }
+      ];
+      
+      const nextEvent = upcomingEvents.find(event => event.date > now);
+      
+      if (nextEvent) {
+        const daysUntil = Math.ceil((nextEvent.date - now) / (1000 * 60 * 60 * 24));
+        const hoursUntil = Math.ceil((nextEvent.date - now) / (1000 * 60 * 60));
+        
+        if (daysUntil > 1) {
+          alert(`The next live conference "${nextEvent.name}" is in ${daysUntil} days.\n\nRegistration will open 3 days before the event. You'll receive a notification when registration is available!`);
+        } else if (hoursUntil > 1) {
+          alert(`The next live conference "${nextEvent.name}" is in ${hoursUntil} hours.\n\nClick OK to proceed to registration.`);
+          window.open('#', '_blank');
+        } else {
+          alert(`The next live conference "${nextEvent.name}" is starting soon!\n\nClick OK to join the live conference now.`);
+          window.open('#', '_blank');
+        }
+      } else {
+        alert("There are currently no live conferences scheduled. Check back soon for updates!");
+      }
+    }
+    
+    // Message functions
+    function updateMessagesDisplay() {
+      messagesList.innerHTML = '';
+      
+      if (messages.length === 0) {
+        messagesList.innerHTML = `
+          <div class="no-messages">
+            <i class="far fa-comment-alt"></i>
+            <h4>No messages yet</h4>
+            <p>Be the first to share your thoughts or ask a question about this conference!</p>
+          </div>
+        `;
+      } else {
+        messages.forEach(message => {
+          const initials = message.name.split(' ').map(n => n[0]).join('').toUpperCase();
+          const messageItem = document.createElement('div');
+          messageItem.className = 'message-item';
+          messageItem.innerHTML = `
+            <div class="message-header">
+              <div class="message-author">
+                <div class="author-avatar">${initials}</div>
+                <div class="author-info">
+                  <h4>${message.name}</h4>
+                  <span class="author-role">${message.role} • ${message.college}</span>
+                </div>
+              </div>
+              <div class="message-time">
+                <i class="far fa-clock"></i> ${message.time}
+              </div>
+            </div>
+            <div class="message-content">
+              ${message.content}
+            </div>
+            <span class="message-category">${message.type.charAt(0).toUpperCase() + message.type.slice(1)}</span>
+          `;
+          messagesList.prepend(messageItem); // Newest first
+        });
+      }
+      
+      messagesCount.textContent = `${messages.length} message${messages.length !== 1 ? 's' : ''}`;
+    }
+    
+    function addMessage(name, college, type, content) {
+      const newMessage = {
+        id: messages.length + 1,
+        name: name,
+        college: college || 'RUB Student',
+        role: college ? 'Student' : 'Guest',
+        content: content,
+        type: type,
+        time: 'Just now'
+      };
+      
+      messages.unshift(newMessage);
+      updateMessagesDisplay();
+      
+      // Show success message
+      showNotification('Your message has been posted successfully!', 'success');
+      
+      // Scroll to the new message
+      messagesList.scrollTop = 0;
+    }
+    
+    function showNotification(message, type) {
+      const notification = document.createElement('div');
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? 'var(--color-success)' : '#ff4444'};
+        color: white;
+        padding: 15px 25px;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        z-index: 1000;
+        animation: slideIn 0.3s ease;
+      `;
+      
+      notification.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+          <span>${message}</span>
+        </div>
+      `;
+      
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => {
+          document.body.removeChild(notification);
+        }, 300);
+      }, 3000);
+    }
+    
+    // Handle form submission
+    messageForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('studentName').value.trim();
+      const college = document.getElementById('studentCollege').value.trim();
+      const type = document.getElementById('messageType').value;
+      const content = document.getElementById('messageText').value.trim();
+      
+      if (!name || !content) {
+        showNotification('Please fill in all required fields', 'error');
+        return;
+      }
+      
+      addMessage(name, college, type, content);
+      
+      // Reset form
+      messageForm.reset();
+      document.getElementById('messageType').value = 'question';
+    });
+    
+    // Auto-play video on click overlay
+    videoOverlay.addEventListener('click', playVideo);
+    
+    // Video click to play/pause
+    video.addEventListener('click', function() {
+      if (video.paused) {
+        playVideo();
+      } else {
+        pauseVideo();
+      }
+    });
+    
+    // Show overlay when video ends
+    video.addEventListener('ended', function() {
+      videoOverlay.classList.remove('hidden');
+      videoOverlay.querySelector('.play-button').innerHTML = '<i class="fas fa-redo"></i>';
+      videoOverlay.querySelector('.play-button').setAttribute('onclick', 'restartVideo()');
+    });
+    
+    // Add keyboard controls
+    document.addEventListener('keydown', function(e) {
+      switch(e.key) {
+        case ' ':
+        case 'k':
+          e.preventDefault();
+          if (video.paused) playVideo();
+          else pauseVideo();
+          break;
+        case 'f':
+          toggleFullscreen();
+          break;
+        case 'r':
+          restartVideo();
+          break;
+        case 'm':
+          toggleMute();
+          break;
+      }
+    });
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set initial progress bar
+      progressBar.style.width = '0%';
+      
+      // Add video loading indicator
+      video.addEventListener('waiting', function() {
+        videoOverlay.classList.remove('hidden');
+        videoOverlay.querySelector('.play-button').innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+      });
+      
+      video.addEventListener('canplay', function() {
+        videoOverlay.querySelector('.play-button').innerHTML = '<i class="fas fa-play"></i>';
+      });
+      
+      // Initialize messages display
+      updateMessagesDisplay();
+      
+      // Add CSS animations for notifications
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes slideIn {
+          from { transform: translateX(100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideOut {
+          from { transform: translateX(0); opacity: 1; }
+          to { transform: translateX(100%); opacity: 0; }
+        }
+      `;
+      document.head.appendChild(style);
+    });
+  </script>
+</body>
+</html>
